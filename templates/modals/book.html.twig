@@ -6,43 +6,29 @@
         <div class="modal-body p-0 pb-5">
             <div class="scrollable-y-auto" data-scrollable="true" data-scrollable-max-height="auto"
                  data-scrollable-offset="300px">
-                <form>
+                <form action="{{ path('app.home') }}" method="post">
+                    {{ form_start(AddReadBookForm) }}
                     <div class="flex flex-col gap-5 p-5">
                         <div class="flex flex-col gap-1">
-                            <label for="book" class="form-label font-normal text-gray-900">Livre</label>
-                            <select id="book" class="select">
-                                <option>Livre 1</option>
-                                <option>Livre 2</option>
-                            </select>
+                            <label for="book" class="form-label font-normal text-gray-900">{{ form_label(AddReadBookForm.book_id) }}</label>
+                            {{ form_widget(AddReadBookForm.book_id) }}
                         </div>
 
                         <div class="flex flex-col gap-1">
-                            <label class="form-label font-normal text-gray-900">Mes notes</label>
+                            <label class="form-label font-normal text-gray-900">{{ form_label(AddReadBookForm.description) }}</label>
                             <div class="flex flex-col w-full gap-1">
-                            <textarea name="description" class="textarea"
-                                      placeholder="Notez-ici les idées importantes de l'oeuvre."></textarea>
-                            </div>
+                            {{ form_widget(AddReadBookForm.description) }}
                         </div>
 
                         <div class="flex flex-col gap-1">
-                            <label for="book" class="form-label font-normal text-gray-900">Note</label>
-                            <select id="book" class="select" name="rating">
-                                <option>1</option>
-                                <option>1.5</option>
-                                <option>2</option>
-                                <option>2.5</option>
-                                <option>3</option>
-                                <option>3.5</option>
-                                <option>4</option>
-                                <option>4.5</option>
-                                <option>5</option>
-                            </select>
+                            <label for="book" class="form-label font-normal text-gray-900">{{ form_label(AddReadBookForm.rating) }}</label>
+                            {{ form_widget(AddReadBookForm.rating) }}
                         </div>
 
                         <div class="flex flex-col gap-1">
                             <label class="switch">
-                                <span class="switch-label font-normal text-gray-900">Lecture terminée</span>
-                                <input name="check" type="checkbox" value="0"/>
+                                <span class="switch-label font-normal text-gray-900">{{ form_label(AddReadBookForm.is_read) }}</span>
+                                {{ form_widget(AddReadBookForm.is_read) }}
                             </label>
                         </div>
 
@@ -50,6 +36,7 @@
                             <button type="submit" class="btn btn-primary">Enregistrer</button>
                         </div>
                     </div>
+                    {{ form_end(AddReadBookForm) }}
                 </form>
             </div>
         </div>
