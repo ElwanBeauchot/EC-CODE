@@ -29,16 +29,16 @@ class HomeController extends AbstractController
             return $this->redirectToRoute('auth.login');
         }
         $userId = $this->getUser()->getId();
-        $booksRead  = $this->bookReadRepository->findByUserId($userId, false);
+        $booksReading  = $this->bookReadRepository->findByUserId($userId, false);
+        $booksRead = $this->bookReadRepository->findByUserId($userId, true);
 
         $bookRead = new BookRead();
         $form = $this->createForm(AddReadBookType::class);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
-            if ($bookRead->isRead() === null) {
-                $bookRead->setIsRead(false);
-            }
+            $is_read = $form->get('is_read')->getData();
+            $bookRead->setIsRead($is_read == null ? false : $is_read);
             $bookRead->setRating($form->get('rating')->getData());
             $bookRead->setDescription($form->get('description')->getData());
             $bookRead->setUserId($userId);
@@ -47,20 +47,15 @@ class HomeController extends AbstractController
             $bookRead->setUpdatedAt(new \DateTime());
             $entityManager->persist($bookRead);
             $entityManager->flush();
+            return $this->redirectToRoute('app.home');
         }
 
-
-
         return $this->render('pages/home.html.twig', [
+            'booksReading' => $booksReading,
             'booksRead' => $booksRead,
             'userId'      => $userId,
             'name'      => 'Accueil', // Pass data to the view
             'AddReadBookForm' => $form,
         ]);
     }
-
-
-
-
-
 }
