@@ -20,8 +20,9 @@ class Book
     #[ORM\Column(type: Types::TEXT)]
     private ?string $description = null;
 
-    #[ORM\Column(type: Types::BIGINT)]
-    private ?string $category_id = null;
+    #[ORM\ManyToOne(targetEntity: Category::class)]
+    #[ORM\JoinColumn(name: "category_id", referencedColumnName: "id", nullable: false)]
+    private ?Category $category_id = null;
 
     #[ORM\Column]
     private ?int $pages = null;
@@ -64,12 +65,12 @@ class Book
         return $this;
     }
 
-    public function getCategoryId(): ?string
+    public function getCategoryId(): ?Category
     {
         return $this->category_id;
     }
 
-    public function setCategoryId(string $category_id): static
+    public function setCategoryId(Category $category_id): static
     {
         $this->category_id = $category_id;
 
