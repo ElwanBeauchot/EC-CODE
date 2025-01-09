@@ -22,7 +22,7 @@
                 </div>
                 <div class="flex flex-col gap-1">
                     <label for="email" class="form-label font-normal text-gray-900">Email</label>
-                    <input id="email" type="text" name="_username" class="input" placeholder="Adresse email" />
+                    <input id="email" type="text" name="_username" class="input" placeholder="Adresse email" value="{{ last_username }}"/>
                 </div>
                 <div class="flex flex-col gap-1">
                     <div class="flex items-center justify-between gap-1">
@@ -31,7 +31,7 @@
                         </label>
                     </div>
                     <div class="input" data-toggle-password="true">
-                        <input name="_password" placeholder="Mot de passe" type="password" value=""/>
+                        <input name="_password" placeholder="Mot de passe" type="password" value="" required />
                         <button class="btn btn-icon" data-toggle-password-trigger="true" type="button">
                             <i class="ki-filled ki-eye text-gray-500 toggle-password-active:hidden">
                             </i>
@@ -39,7 +39,11 @@
                             </i>
                         </button>
                     </div>
+                    {% if error %}
+                        <div class="text-danger text-sm">Email ou mot de passe incorrect</div>
+                    {% endif %}
                 </div>
+                <input type="hidden" name="_target_path" value="/">
                 <button type="submit" class="btn btn-primary flex justify-center grow">Connexion</button>
             </form>
         </div>

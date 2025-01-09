@@ -6,7 +6,8 @@
     <!-- Page -->
     <div class="flex items-center justify-center grow bg-center bg-no-repeat page-bg">
         <div class="card max-w-[370px] w-full">
-            <form action="#" class="card-body flex flex-col gap-5 p-10" id="sign_up_form" method="post">
+            <form action="" class="card-body flex flex-col gap-5 p-10" id="sign_up_form" method="post">
+                {{ form_start(registerForm) }}
                 <div class="text-center mb-2.5">
                     <h3 class="text-lg font-medium text-gray-900 leading-none mb-2.5">
                         Inscription
@@ -22,28 +23,35 @@
                 </div>
 
                 <div class="flex flex-col gap-1">
-                    <label class="form-label text-gray-900">Email</label>
-                    <input class="input" name="user_email" placeholder="Adresse email" type="text" value=""/>
+                    <label class="form-label text-gray-900">{{ form_label(registerForm.email) }}</label>
+                    <div class="input">
+                        {{ form_widget(registerForm.email) }}
+                    </div>
+                    <div class="text-danger">
+                        {{ form_errors(registerForm.email) }}
+                    </div>
                 </div>
                 <div class="flex flex-col gap-1">
-                    <label class="form-label font-normal text-gray-900">Mot de passe</label>
+                    <label class="form-label font-normal text-gray-900">{{ form_label(registerForm.password) }}</label>
                     <div class="input" data-toggle-password="true">
-                        <input name="user_password" placeholder="Mot de passe" type="password" value="">
+                        {{ form_widget(registerForm.password) }}
                         <button class="btn btn-icon" data-toggle-password-trigger="true" type="button">
                             <i class="ki-filled ki-eye text-gray-500 toggle-password-active:hidden">
                             </i>
                             <i class="ki-filled ki-eye-slash text-gray-500 hidden toggle-password-active:block">
                             </i>
                         </button>
-                        </input>
+                    </div>
+                    <div class="text-danger">
+                        {{ form_errors(registerForm.password) }}
                     </div>
                 </div>
                 <div class="flex flex-col gap-1">
                     <label class="form-label font-normal text-gray-900">
-                        Confirmer le mot de passe
+                        {{ form_label(registerForm.confirmPassword) }}
                     </label>
                     <div class="input" data-toggle-password="true">
-                        <input name="user_password" placeholder="Confirmez le mot de passe" type="password" value=""/>
+                        {{ form_widget(registerForm.confirmPassword) }}
                         <button class="btn btn-icon" data-toggle-password-trigger="true" type="button">
                             <i class="ki-filled ki-eye text-gray-500 toggle-password-active:hidden">
                             </i>
@@ -51,14 +59,23 @@
                             </i>
                         </button>
                     </div>
+                    <div class="text-danger">
+                        {{ form_errors(registerForm.confirmPassword) }}
+                    </div>
                 </div>
                 <label class="checkbox-group">
-                    <input class="checkbox checkbox-sm" name="check" type="checkbox" value="1"/>
+                    <div class="checkbox checkbox-sm">
+                        {{ form_widget(registerForm.agreeTerms) }}
+                    </div>
                     <span class="checkbox-label">
                         J'accepte les <a class="text-2sm link" href="#">GCU</a>
                     </span>
+                    <div class="text-danger">
+                        {{ form_errors(registerForm.agreeTerms) }}
+                    </div>
                 </label>
                 <button class="btn btn-primary flex justify-center grow">Inscription</button>
+                {{ form_end(registerForm) }}
             </form>
         </div>
     </div>
