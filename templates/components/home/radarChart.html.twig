@@ -14,18 +14,18 @@
     <script>
         var options = {
             chart: {
-                width: "100%",
-                height: "100%",
+                width: "400px",
+                height: "400px",
                 type: 'radar'
             },
             series: [
                 {
                     name: "Nombre de lectures",
-                    data: [{% for category in categories %} '{{ category.count }}', {% endfor%}],
+                    data: [{% for category in categories %} '{{ category.count }}', {% endfor %}],
                 },
             ],
             xaxis: {
-                categories: [{% for category in categories%} '{{ category.name }}', {% endfor %}],
+                categories: [{% for category in categories %} '{{ category.name }}', {% endfor %}],
                 labels: {
                     show: true,
                     style: {
