@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html class="h-full" data-theme="true" data-theme-mode="light" dir="ltr" lang="fr">
+<head>
+    <title>BookMaster</title>
+    <meta charset="utf-8"/>
+    <meta content="follow, index" name="robots"/>
+    <meta content="width=device-width, initial-scale=1, shrink-to-fit=no" name="viewport"/>
+    <meta content="" name="description"/>
+    <link href="{{ asset('media/icon.png') }}" rel="shortcut icon"/>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet"/>
+    <link href="{{ asset('metronic/vendors/apexcharts/apexcharts.css') }}" rel="stylesheet"/>
+    <link href="{{ asset('metronic/vendors/keenicons/styles.bundle.css') }}" rel="stylesheet"/>
+    <link href="{{ asset('metronic/css/styles.css') }}" rel="stylesheet"/>
+</head>
+<body class="antialiased flex h-full text-base text-gray-700 [--tw-page-bg:#F6F6F9] [--tw-page-bg-dark:var(--tw-coal-200)]
+        [--tw-content-bg:var(--tw-light)] [--tw-content-bg-dark:var(--tw-coal-500)] [--tw-content-scrollbar-color:#e8e8e8]
+        [--tw-header-height:60px] [--tw-sidebar-width:90px] bg-[--tw-page-bg] dark:bg-[--tw-page-bg-dark]">
+<!-- Theme Mode -->
+
+{% block body %}
+    {% if formEdit is defined %}
+        <div>
+            <div class="modal-content max-w-[600px] top-[15%]">
+                <div class="modal-header py-4 px-5">
+                    <h3 class="modal-title">Modifier ma lecture</h3>
+                </div>
+                <div class="modal-body p-0 pb-5">
+                    <div class="scrollable-y-auto" data-scrollable="true" data-scrollable-max-height="auto"
+                         data-scrollable-offset="300px">
+                        <form action="{{ path('app.edit_review', {'id': bookRead.id}) }}" method="post">
+                            {{ form_start(formEdit) }}
+                            <div class="flex flex-col gap-5 p-5">
+                                <div class="flex flex-col gap-1">
+                                    <label for="book"
+                                           class="form-label font-normal text-gray-900">{{ form_label(formEdit.book_id) }}</label>
+                                    {{ form_widget(formEdit.book_id, {'attr': {'class': 'form-control'}}) }}
+                                </div>
+
+                                <div class="flex flex-col gap-1">
+                                    <label class="form-label font-normal text-gray-900">{{ form_label(formEdit.description) }}</label>
+                                    <div class="flex flex-col w-full gap-1">
+                                        {{ form_widget(formEdit.description, {'attr': {'class': 'form-control'}}) }}
+                                    </div>
+
+                                    <div class="flex flex-col gap-1">
+                                        <label for="book"
+                                               class="form-label font-normal text-gray-900">{{ form_label(formEdit.rating) }}</label>
+                                        {{ form_widget(formEdit.rating, {'attr': {'class': 'form-control'}}) }}
+                                    </div>
+
+                                    <div class="flex flex-col gap-1">
+                                        <label class="switch">
+                                            <span class="switch-label font-normal text-gray-900">{{ form_label(formEdit.is_read) }}</span>
+                                            {{ form_widget(formEdit.is_read, {'attr': {'class': 'form-control'}}) }}
+                                        </label>
+                                    </div>
+
+                                    <div class="flex">
+                                        <button type="submit" class="btn btn-primary">Enregistrer</button>
+                                    </div>
+                                </div>
+                                {{ form_end(formEdit) }}
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    {% endif %}
+{% endblock %}
+</body>
+</html>

@@ -1,0 +1,36 @@
+{% extends 'base.html.twig' %}
+{% block body %}
+    <div class="grid grid-cols-1 lg:grid-cols-2 xl:grid-cols-3 gap-5 lg:gap-7.5">
+        {% for bookRead in books %}
+            <div class="card border-0">
+                <div class="card-border card-rounded-b flex flex-col gap-2 px-5 py-4.5">
+                    <a class="text-lg font-medium text-gray-900 hover:text-primary" href="">
+                        {{ bookRead.bookId.name }}
+
+                    </a>
+                    <div>{{ bookRead.description|raw }}</div>
+                    <div class="flex items-center justify-between grow">
+                        <div class="flex items-center grow">
+                            <img alt="" class="rounded-full size-7 me-2" src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTSLU5_eUUGBfxfxRd4IquPiEwLbt4E_6RYMw&s" />
+                            <a class="text-2sm text-gray-800 hover:text-primary mb-px" href="">
+                                Utilisateur
+                            </a>
+                        </div>
+                        <div class="flex gap-3 items-center">
+                            <div class="flex gap-1 items-center">
+                                <i class="ki-filled ki-heart text-base text-gray-500">
+                                </i>
+                                <span class="text-2sm text-gray-800 py-2">24</span>
+                            </div>
+                            <div class="flex gap-1 items-center">
+                                <i class="ki-filled ki-messages text-base text-gray-500">
+                                </i>
+                                <span class="text-2sm text-gray-800 py-2">5</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        {% endfor %}
+    </div>
+{% endblock %}
