@@ -1,0 +1,50 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}BookRead{% endblock %}
+
+{% block body %}
+    <h1>BookRead</h1>
+
+    <table class="table">
+        <tbody>
+            <tr>
+                <th>Id</th>
+                <td>{{ book_read.id }}</td>
+            </tr>
+            <tr>
+                <th>User_id</th>
+                <td>{{ book_read.userId }}</td>
+            </tr>
+            <tr>
+                <th>Rating</th>
+                <td>{{ book_read.rating }}</td>
+            </tr>
+            <tr>
+                <th>Description</th>
+                <td>{{ book_read.description }}</td>
+            </tr>
+            <tr>
+                <th>Is_read</th>
+                <td>{{ book_read.isRead ? 'Yes' : 'No' }}</td>
+            </tr>
+            <tr>
+                <th>Cover</th>
+                <td>{{ book_read.cover }}</td>
+            </tr>
+            <tr>
+                <th>Created_at</th>
+                <td>{{ book_read.createdAt ? book_read.createdAt|date('Y-m-d H:i:s') : '' }}</td>
+            </tr>
+            <tr>
+                <th>Updated_at</th>
+                <td>{{ book_read.updatedAt ? book_read.updatedAt|date('Y-m-d H:i:s') : '' }}</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <a href="{{ path('app_book_read_index') }}">back to list</a>
+
+    <a href="{{ path('app_book_read_edit', {'id': book_read.id}) }}">edit</a>
+
+    {{ include('book_read/_delete_form.html.twig') }}
+{% endblock %}
