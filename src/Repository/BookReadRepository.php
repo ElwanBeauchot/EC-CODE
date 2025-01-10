@@ -33,4 +33,18 @@ class BookReadRepository extends ServiceEntityRepository
             ->getQuery()
             ->getResult();
     }
+
+    /**
+     * Méthode pour trouver un BookRead par book_id
+     * @param int $bookId
+     * @return BookRead|null
+     */
+    public function findByBookId(int $bookId): ?BookRead
+    {
+        return $this->createQueryBuilder('r')
+            ->where('r.book_id = :bookId')
+            ->setParameter('bookId', $bookId)
+            ->getQuery()
+            ->getOneOrNullResult();
+    }
 }

@@ -14,7 +14,7 @@ class LogoutController extends AbstractController
     {
         $security->logout();
 
-        return $this->render('logout/index.html.twig', [
+        return $this->render('logout/feed.html.twig', [
             'controller_name' => 'LogoutController',
         ]);
     }

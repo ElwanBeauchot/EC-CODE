@@ -6,6 +6,7 @@ use AllowDynamicProperties;
 use App\Entity\BookRead;
 use App\Form\AddReadBookType;
 use App\Repository\BookReadRepository;
+use App\Repository\BookRepository;
 use App\Repository\CategoryRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -16,14 +17,11 @@ use Symfony\Component\Routing\Attribute\Route;
 
 #[AllowDynamicProperties] class HomeController extends AbstractController
 {
-    private BookReadRepository $readBookRepository;
-
-    // Inject the repository via the constructor
-    public function __construct(BookReadRepository $bookReadRepository, CategoryRepository $categoryRepository )
+    public function __construct(BookReadRepository $bookReadRepository, CategoryRepository $categoryRepository, BookRepository $bookRepository )
     {
         $this->bookReadRepository = $bookReadRepository;
-
         $this->categoryRepository = $categoryRepository;
+        $this->bookRepository = $bookRepository;
     }
 
     #[Route('/', name: 'app.home')]
@@ -36,6 +34,30 @@ use Symfony\Component\Routing\Attribute\Route;
         $userId = $this->getUser()->getId();
         $booksReading = $this->bookReadRepository->findByUserId($userId, false);
         $booksRead = $this->bookReadRepository->findByUserId($userId, true);
+
+        $allBooks = $this->bookRepository->findAll();
+
+        $booksWithRatings = [];
+
+        foreach ($allBooks as $book) {
+            $bookReads = $this->bookReadRepository->findBy(['book_id' => $book->getId()]);
+
+            $ratingSum = 0;
+            $ratingCount = 0;
+
+            foreach ($bookReads as $bookRead) {
+                if ($bookRead->getRating() !== null) {
+                    $ratingSum += $bookRead->getRating();
+                    $ratingCount++;
+                }
+            }
+
+            $averageRating = $ratingCount > 0 ? $ratingSum / $ratingCount : 0;
+            $booksWithRatings[$book->getId()] = [
+                'book' => $book,
+                'averageRating' => $averageRating
+            ];
+        }
 
         /* for the chart */
         $categories = [];
@@ -81,6 +103,7 @@ use Symfony\Component\Routing\Attribute\Route;
             'name' => 'Accueil',
             'AddReadBookForm' => $form,
             'categories' => $categories,
+            'allBooks' => $booksWithRatings,
         ]);
     }
 }
