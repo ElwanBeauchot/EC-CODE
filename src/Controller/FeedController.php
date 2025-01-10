@@ -24,7 +24,7 @@ use Symfony\Component\Routing\Attribute\Route;
             return $this->redirectToRoute('auth.login');
         }
 
-
+        /* get all books review */
         $books = $this->bookReadRepository->findAll();
 
         return $this->render('pages/feed.html.twig', [
