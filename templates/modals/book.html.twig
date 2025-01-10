@@ -2,6 +2,9 @@
     <div class="modal-content max-w-[600px] top-[15%]">
         <div class="modal-header py-4 px-5">
             <h3 class="modal-title">Ma lecture</h3>
+            <button class="btn btn-sm btn-icon btn-light btn-clear shrink-0" data-modal-dismiss="true">
+                <i class="ki-filled ki-cross"></i>
+            </button>
         </div>
         <div class="modal-body p-0 pb-5">
             <div class="scrollable-y-auto" data-scrollable="true" data-scrollable-max-height="auto"
@@ -10,33 +13,35 @@
                     {{ form_start(AddReadBookForm) }}
                     <div class="flex flex-col gap-5 p-5">
                         <div class="flex flex-col gap-1">
-                            <label for="book" class="form-label font-normal text-gray-900">{{ form_label(AddReadBookForm.book_id) }}</label>
+                            <label for="book"
+                                   class="form-label font-normal text-gray-900">{{ form_label(AddReadBookForm.book_id) }}</label>
                             {{ form_widget(AddReadBookForm.book_id) }}
                         </div>
 
                         <div class="flex flex-col gap-1">
                             <label class="form-label font-normal text-gray-900">{{ form_label(AddReadBookForm.description) }}</label>
                             <div class="flex flex-col w-full gap-1">
-                            {{ form_widget(AddReadBookForm.description) }}
-                        </div>
+                                {{ form_widget(AddReadBookForm.description) }}
+                            </div>
 
-                        <div class="flex flex-col gap-1">
-                            <label for="book" class="form-label font-normal text-gray-900">{{ form_label(AddReadBookForm.rating) }}</label>
-                            {{ form_widget(AddReadBookForm.rating) }}
-                        </div>
+                            <div class="flex flex-col gap-1">
+                                <label for="book"
+                                       class="form-label font-normal text-gray-900">{{ form_label(AddReadBookForm.rating) }}</label>
+                                {{ form_widget(AddReadBookForm.rating) }}
+                            </div>
 
-                        <div class="flex flex-col gap-1">
-                            <label class="switch">
-                                <span class="switch-label font-normal text-gray-900">{{ form_label(AddReadBookForm.is_read) }}</span>
-                                {{ form_widget(AddReadBookForm.is_read) }}
-                            </label>
-                        </div>
+                            <div class="flex flex-col gap-1">
+                                <label class="switch">
+                                    <span class="switch-label font-normal text-gray-900">{{ form_label(AddReadBookForm.is_read) }}</span>
+                                    {{ form_widget(AddReadBookForm.is_read) }}
+                                </label>
+                            </div>
 
-                        <div class="flex">
-                            <button type="submit" class="btn btn-primary">Enregistrer</button>
+                            <div class="flex">
+                                <button type="submit" class="btn btn-primary">Enregistrer</button>
+                            </div>
                         </div>
-                    </div>
-                    {{ form_end(AddReadBookForm) }}
+                        {{ form_end(AddReadBookForm) }}
                 </form>
             </div>
         </div>
